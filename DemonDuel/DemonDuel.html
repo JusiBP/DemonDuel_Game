@@ -8,10 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-    <div> <!-- Global Screen -->
+    <!-- <div id="pickCharacterBlock"> 
         <div class="pickCharacter"> 
-            <div class="players"> <!-- Player 1 -->
-                <div class="characters"> <!-- Player 1. Box -->
+            <div class="players"> 
+                <div class="characters"> 
                     <p class="titlePlayer">PLAYER 1</p>
                     <img class="character" src="../Images/2_Character1.PNG" alt="Character 1">
                     <img class="character" src="../Images/2_Character2.PNG" alt="Character 2">
@@ -19,8 +19,8 @@
                 </div>
                 
             </div> 
-            <div class="players"> <!-- Player 2 -->
-                <div class="characters"> <!-- Player 2. Box-->
+            <div class="players">
+                <div class="characters"> 
                     <p class="titlePlayer">PLAYER 2</p>
                     <img class="character" src="../Images/2_Character1.PNG" alt="Character 1">
                     <img class="character" src="../Images/2_Character2.PNG" alt="Character 2">
@@ -29,8 +29,50 @@
             </div> 
         </div>
         <button class="goDuel" type="button" name="duel">DUEL</button>
-    </div>
+    </div> -->
     
-    <div class="duel"></div>
+    <div id="duelBlock" class="duel"> 
+        <div class = "playerBox"> 
+            <div> 
+                <p class="titlePlayerDuel">PLAYER 1</p>
+            </div>
+            <div class="propertiesDiv"> 
+                <img class = "propertiesNow" src="../Images/3_PropertiesNow.PNG" alt="Player 1 Status">
+            </div>
+            <div class="flexDuel" >
+                <div class="characterDiv"> 
+                    <img class="characterDuel" src="../Images/3.1.1.PNG" alt="Player 1 Character">
+                </div> 
+                <div class="duelOptions">
+                    <img class="duelButton" src="../Images/3_Fire.PNG" alt="Fire Button">
+                    <img class="duelButton" src="../Images/3_Load.PNG" alt="Load Button">
+                    <img class="duelButton" src="../Images/3_Shield.PNG" alt="Shield Button">
+                </div> 
+            </div>
+            <div class="log" > 
+            </div>
+        </div>
+
+        <div class = "playerBox">
+            <div>
+                <p class="titlePlayerDuel">PLAYER 2</p>
+            </div>
+            <div class="propertiesDiv">
+                <img class="propertiesNow" src="../Images/3_PropertiesNow.PNG" alt="Player 2 Status">
+            </div>
+            <div class="flexDuel">
+                <div class="characterDiv"> 
+                    <img class="characterDuel" src="../Images/3.3.1.PNG" alt="Player 2 Character">
+                </div> 
+                <div class="duelOptions"> 
+                    <img class="duelButton" src="../Images/3_Fire.PNG" alt="Fire Button">
+                    <img class="duelButton" src="../Images/3_Load.PNG" alt="Load Button">
+                    <img class="duelButton" src="../Images/3_Shield.PNG" alt="Shield Button">
+                </div> 
+            </div>
+            <div class = "log"> 
+            </div>
+        </div>
+    </div>
 </body>
 </html>

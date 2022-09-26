@@ -3,6 +3,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100%;
     position: relative;
+    
    }
 
 .anchorFlex {
@@ -24,4 +25,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.anchor:hover {
+    transform: scale(1.1);
+}
+
+.anchor:active {
+    transform: scale(0.9);
 }
