@@ -1,0 +1,27 @@
+body {
+    background-image: url("../Images/DD_Initial_Screen.PNG");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: relative;
+   }
+
+.anchorFlex {
+    display: flex;
+    justify-content: center;
+}
+
+.anchor {
+    background-color: #3d2f40;
+    width: 35vw;
+    height: 7vh;
+    color: white;
+    margin-bottom: 200px;
+    margin-top: 60%;
+    border-radius: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 180%;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

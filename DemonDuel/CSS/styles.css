@@ -1,0 +1,63 @@
+body {
+    background-image: url("../../Images/DD_Duel_Screen.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+
+.pickCharacter {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    margin-top: 4%;
+}   
+
+.characters {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgba(220, 54, 54, 0.772);
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.titlePlayer {
+    color: white;
+    font-size: 200%;
+    padding-top: 5%;
+    margin: auto;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.character {
+    width: 100%;
+    height: auto;
+}
+
+.goDuel {
+    background-color: #3d2f40;
+    color: white;
+    width: 25vw;
+    height: 5vh;
+    margin-top: 2%;
+    border-radius: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 180%;
+    text-decoration: none;
+    margin: auto;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(255,255,255,1);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(255,255,255,1);
+    box-shadow: 0px 0px 22px 0px rgba(255,255,255,1);
+}
+
+ 
