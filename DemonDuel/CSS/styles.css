@@ -94,7 +94,7 @@ body {
 
 .playerBox {
     padding: 15px;
-    /* border-right: 3px solid rgba(17, 46, 92, 0.547); */
+    margin-bottom: 0px;
 }
 
 .duelPlayer {
@@ -111,23 +111,48 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+.propertiesStyle {
+    color: white;
+    font-size: 180%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding-bottom: 20px;
+    padding-top: 5px;
+}
+
 .propertiesDiv {
+    background-image: url(../../Images/3_PropertiesNow.PNG);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 35vw;
+    height: 10vh;
+    min-width:248px;
+    min-height: 58px;
+    max-width:351px;
+    min-height: 82px;
+    margin: auto;
+    margin-top: 0%;
+    margin-bottom: 1%;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* align-items: center; --->  REPLANTEAR SI ES POSIBLE ADAPTAR*/ 
+    
 }
 
 .propertiesNow {
     width: 35vw;
     height: auto;
-    margin: auto;
-    
+    /* margin: auto; */
 }
 
 .flexDuel {
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    margin: auto
+    margin: auto;
+    max-width: 477px;
+    max-height: 420px;
 }
 
 .characterDiv {
@@ -166,8 +191,20 @@ body {
     height: 10vh;
     margin: auto;
     margin-top: 4%;
-    margin-bottom: 7%;
+    margin-bottom: 0px;
     border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+}
+
+.logStyles {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 120%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    text-align: center;
 }
 
 

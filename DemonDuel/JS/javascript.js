@@ -1,5 +1,5 @@
 class Demon {
-    constructor (name, health, attack, shield, img100, img60, img30) {
+    constructor (name, health, attack, shield, img100, img60, img30, state) {
       this.name = name;
       this.health = health;
       this.attack = attack;
@@ -8,13 +8,13 @@ class Demon {
       this.img60 = img60;
       this.img30 = img30;
       this.ammo = 0;
-      this.state = "";
+      this.state = state;
     }
   }
 //Characters - objects (properties defined)
-let demon1 = new Demon ("Jack", 110, 50, 30, "../Images/3.1.1.PNG", "../Images/3.1.2.PNG", "../Images/3.1.3.PNG");
-let demon2 = new Demon ("Joe", 80, 60, 0, "../Images/3.2.1.PNG", "../Images/3.2.2.PNG", "../Images/3.3.3.PNG");
-let demon3 = new Demon ("Julie", 150, 40, 50, "../Images/3.3.1.PNG", "../Images/3.3.2.PNG", "../Images/3.3.3.PNG");
+let demon1 = new Demon ("LUCIFER", 110, 50, 30, "../Images/3.1.1.PNG", "../Images/3.1.2.PNG", "../Images/3.1.3.PNG", "LUCIFER: Your time has come to burn eternally.");
+let demon2 = new Demon ("LEYAK", 80, 60, 0, "../Images/3.2.1.PNG", "../Images/3.2.2.PNG", "../Images/3.3.3.PNG", "LEYAK: No hope is left for you!");
+let demon3 = new Demon ("LILITH", 150, 40, 50, "../Images/3.3.1.PNG", "../Images/3.3.2.PNG", "../Images/3.3.3.PNG", "LILITH: Prepare your soul for darkness...");
 
 //Demons to pick & image & properties to load - activation in "activation" function
 let player1Demon = 0; // 1, 2 o 3 depending on character
@@ -104,43 +104,48 @@ function activateDuel() {
 console.log(bodyforDom)
 duelScreenDiv.innerHTML = `<div class = "playerBox"> 
 <div> 
-<p class="titlePlayerDuel">PLAYER 1</p>
+    <p class="titlePlayerDuel">PLAYER 1</p>
 </div>
-<div class="propertiesDiv"> 
-<img class = "propertiesNow" src="../Images/3_PropertiesNow.PNG" alt="Player 1 Status">
+<div class="propertiesDiv">
+    <p id="healthP1" class="propertiesStyle">${player1DemonObj.health}</p>
+    <p id="ammoP1" class="propertiesStyle">${player1DemonObj.ammo}</p>
 </div>
 <div class="flexDuel" >
-<div class="characterDiv"> 
-<img id="imgDemonPlayer1" class="characterDuel" src=${player1DemonObj.img100} alt="Player 1 Character">
-</div> 
-<div class="duelOptions">
-<img class="duelButton" src="../Images/3_Fire.PNG" alt="Fire Button">
-<img class="duelButton" src="../Images/3_Load.PNG" alt="Load Button">
-<img class="duelButton" src="../Images/3_Shield.PNG" alt="Shield Button">
-</div> 
+    <div class="characterDiv"> 
+        <img id="imgDemonPlayer1" class="characterDuel" src="${player1DemonObj.img100}" alt="Player 1 Character">
+    </div> 
+    <div class="duelOptions">
+        <img class="duelButton" src="../Images/3_Fire.PNG" alt="Fire Button">
+        <img class="duelButton" src="../Images/3_Load.PNG" alt="Load Button">
+        <img class="duelButton" src="../Images/3_Shield.PNG" alt="Shield Button">
+    </div> 
 </div>
 <div class="log" > 
+    <p id="logP1" class="logStyles">${player1DemonObj.state}</p>
 </div>
 </div>
 
 <div class = "playerBox">
 <div>
-<p class="titlePlayerDuel">PLAYER 2</p>
+    <p class="titlePlayerDuel">PLAYER 2</p>
 </div>
 <div class="propertiesDiv">
-<img class="propertiesNow" src="../Images/3_PropertiesNow.PNG" alt="Player 2 Status">
+    <p id="healthP2" class="propertiesStyle">${player2DemonObj.health}</p>
+    <p id="ammoP2" class="propertiesStyle">${player2DemonObj.ammo}</p>
 </div>
 <div class="flexDuel">
-<div class="characterDiv"> 
-<img id="imgDemonPlayer2" class="characterDuel" src="${player2DemonObj.img100}" alt="Player 2 Character">
-</div> 
-<div class="duelOptions"> 
-<img class="duelButton" src="../Images/3_Fire.PNG" alt="Fire Button">
-<img class="duelButton" src="../Images/3_Load.PNG" alt="Load Button">
-<img class="duelButton" src="../Images/3_Shield.PNG" alt="Shield Button">
-</div> 
+    <div class="characterDiv"> 
+        <img id="imgDemonPlayer2" class="characterDuel" src="${player2DemonObj.img100}" alt="Player 2 Character">
+    </div> 
+    <div class="duelOptions"> 
+        <img class="duelButton" src="../Images/3_Fire.PNG" alt="Fire Button">
+        <img class="duelButton" src="../Images/3_Load.PNG" alt="Load Button">
+        <img class="duelButton" src="../Images/3_Shield.PNG" alt="Shield Button">
+    </div> 
 </div>
 <div class = "log"> 
+    <p id="logP2" class="logStyles">${player2DemonObj.state}</p>
+</div>
 </div>`
 console.log(duelScreenDiv)
 bodyforDom.appendChild(duelScreenDiv);
