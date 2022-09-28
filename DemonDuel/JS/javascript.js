@@ -10,7 +10,7 @@ class Demon {
       this.img30 = img30;
       this.ammo = 0;
       this.state = state;
-      this.duelOption = ""; //Option picked in duel (fire, load, shield)
+      this.duelOption = ""; //Option picked in duel (fire, load, shield )
     }
   }
 //Characters - objects (properties defined)
