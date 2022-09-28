@@ -1,83 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="CSS/styles.css" />
     <title>Document</title>
-</head>
-<body id="bodyBlock">
-    <div id="pickCharacterBlock"> 
-        <div class="pickCharacter"> 
-            <div class="players"> 
-                <div class="characters"> 
-                    <p class="titlePlayer">PLAYER 1</p>
-                    <img id="demon1P1" class="character" src="../Images/2_Character1.PNG" alt="Character 1">
-                    <img id="demon2P1" class="character" src="../Images/2_Character2.PNG" alt="Character 2">
-                    <img id="demon3P1" class="character" src="../Images/2_Character3.PNG" alt="Character 3">
-                </div>
-                
-            </div> 
-            <div class="players">
-                <div class="characters"> 
-                    <p class="titlePlayer">PLAYER 2</p>
-                    <img id="demon1P2" class="character" src="../Images/2_Character1.PNG" alt="Character 1">
-                    <img id="demon2P2" class="character" src="../Images/2_Character2.PNG" alt="Character 2">
-                    <img id="demon3P2" class="character" src="../Images/2_Character3.PNG" alt="Character 3">
-                </div>
-            </div> 
+  </head>
+  <body id="bodyBlock">
+    <div id="pickCharacterBlock">
+      <div class="pickCharacter">
+        <div class="players">
+          <div class="characters">
+            <p class="titlePlayer">PLAYER 1</p>
+            <img
+              id="demon1P1"
+              class="character"
+              src="../Images/2_Character1.PNG"
+              alt="Character 1"
+            />
+            <img
+              id="demon2P1"
+              class="character"
+              src="../Images/2_Character2.PNG"
+              alt="Character 2"
+            />
+            <img
+              id="demon3P1"
+              class="character"
+              src="../Images/2_Character3.PNG"
+              alt="Character 3"
+            />
+          </div>
         </div>
-        <button id="goDuel" class="goDuel" type="button" name="duel">DUEL</button>
+        <div class="players">
+          <div class="characters">
+            <p class="titlePlayer">PLAYER 2</p>
+            <img
+              id="demon1P2"
+              class="character"
+              src="../Images/2_Character1.PNG"
+              alt="Character 1"
+            />
+            <img
+              id="demon2P2"
+              class="character"
+              src="../Images/2_Character2.PNG"
+              alt="Character 2"
+            />
+            <img
+              id="demon3P2"
+              class="character"
+              src="../Images/2_Character3.PNG"
+              alt="Character 3"
+            />
+          </div>
+        </div>
+      </div>
+      <button id="goDuel" class="goDuel" type="button" name="duel">DUEL</button>
     </div>
-    
-    <!-- <div id="duelBlock" class="duel"> 
-        <div class = "playerBox"> 
-            <div> 
-                <p class="titlePlayerDuel">PLAYER 1</p>
-            </div>
-            <div class="propertiesDiv">
-                <p id="healthP1" class="propertiesStyle">X</p>
-                <p id="ammoP1" class="propertiesStyle">X</p>
-            </div>
-            <div class="flexDuel" >
-                <div class="characterDiv"> 
-                    <img id="imgDemonPlayer1" class="characterDuel" src="../Images/3.1.1.PNG" alt="Player 1 Character">
-                </div> 
-                <div class="duelOptions">
-                    <img class="duelButton" src="../Images/3_Fire.PNG" alt="Fire Button">
-                    <img class="duelButton" src="../Images/3_Load.PNG" alt="Load Button">
-                    <img class="duelButton" src="../Images/3_Shield.PNG" alt="Shield Button">
-                </div> 
-            </div>
-            <div class="log" > 
-                <p id="logP1" class="logStyles">Status: Player 1 prepared to duel!</p>
-            </div>
-        </div>
 
-        <div class = "playerBox">
-            <div>
-                <p class="titlePlayerDuel">PLAYER 2</p>
-            </div>
-            <div class="propertiesDiv">
-                <p id="healthP2" class="propertiesStyle">X</p>
-                <p id="ammoP2" class="propertiesStyle">X</p>
-            </div>
-            <div class="flexDuel">
-                <div class="characterDiv"> 
-                    <img id="imgDemonPlayer2" class="characterDuel" src="../Images/3.1.1.PNG" alt="Player 2 Character">
-                </div> 
-                <div class="duelOptions"> 
-                    <img class="duelButton" src="../Images/3_Fire.PNG" alt="Fire Button">
-                    <img class="duelButton" src="../Images/3_Load.PNG" alt="Load Button">
-                    <img class="duelButton" src="../Images/3_Shield.PNG" alt="Shield Button">
-                </div> 
-            </div>
-            <div class = "log"> 
-                <p id="logP2" class="logStyles">Status: Player 2 prepared to duel!</p>
-            </div>
+    <div id="duelBlock" class="duel">
+      <div class="playerBox">
+        <div>
+          <p class="titlePlayerDuel">PLAYER 1</p>
         </div>
-    </div> -->
+        <div class="propertiesDiv">
+          <p id="healthP1" class="propertiesStyle"></p>
+          <p id="ammoP1" class="propertiesStyle"></p>
+        </div>
+        <div class="flexDuel">
+          <div class="characterDiv">
+            <img
+              id="imgDemonPlayer1"
+              class="characterDuel"
+              src=""
+              alt="Player 1 Character"
+            />
+          </div>
+          <div class="duelOptions">
+            <img
+              id="fireP1"
+              class="duelButton"
+              src="../Images/3_Fire.PNG"
+              alt="Fire Button"
+            />
+            <img
+              id="loadP1"
+              class="duelButton"
+              src="../Images/3_Load.PNG"
+              alt="Load Button"
+            />
+            <img
+              id="shieldP1"
+              class="duelButton"
+              src="../Images/3_Shield.PNG"
+              alt="Shield Button"
+            />
+          </div>
+        </div>
+        <div class="log">
+          <p id="logP1" class="logStyles"></p>
+        </div>
+      </div>
+
+      <div class="playerBox">
+        <div>
+          <p class="titlePlayerDuel">PLAYER 2</p>
+        </div>
+        <div class="propertiesDiv">
+          <p id="healthP2" class="propertiesStyle"></p>
+          <p id="ammoP2" class="propertiesStyle"></p>
+        </div>
+        <div class="flexDuel">
+          <div class="characterDiv">
+            <img
+              id="imgDemonPlayer2"
+              class="characterDuel"
+              src=""
+              alt="Player 2 Character"
+            />
+          </div>
+          <div class="duelOptions">
+            <img
+              id="fireP2"
+              class="duelButton"
+              src="../Images/3_Fire.PNG"
+              alt="Fire Button"
+            />
+            <img
+              id="loadP2"
+              class="duelButton"
+              src="../Images/3_Load.PNG"
+              alt="Load Button"
+            />
+            <img
+              id="shieldP2"
+              class="duelButton"
+              src="../Images/3_Shield.PNG"
+              alt="Shield Button"
+            />
+          </div>
+        </div>
+        <div class="log">
+          <p id="logP2" class="logStyles"></p>
+        </div>
+      </div>
+    </div>
     <script src="/DemonDuel/JS/javascript.js"></script>
-</body>
+  </body>
 </html>
