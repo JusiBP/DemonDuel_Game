@@ -1,5 +1,5 @@
 class Demon {
-    constructor (name, health, healthOrigin, attack, shield, img100, img60, img30, state) {
+    constructor (name, health, healthOrigin, attack, shield, img100, img60, img30, imgWin, imgDead, state) {
       this.name = name;
       this.health = health;
       this.healthOrigin = healthOrigin
@@ -8,15 +8,17 @@ class Demon {
       this.img100 = img100;
       this.img60 = img60;
       this.img30 = img30;
+      this.imgWin = imgWin;
+      this.imgDead = imgDead;
       this.ammo = 0;
       this.state = state;
       this.duelOption = ""; //Option picked in duel (fire, load, shield )
     }
   }
 //Characters - objects (properties defined)
-let demon1 = new Demon ("LUCIFER", 110, 110, 50, 30, "../Images/3.1.1.PNG", "../Images/3.1.2.PNG", "../Images/3.1.3.PNG", "LUCIFER: Your time has come to burn eternally.");
-let demon2 = new Demon ("LEYAK", 80, 80, 60, 0, "../Images/3.2.1.PNG", "../Images/3.2.2.PNG", "../Images/3.2.3.PNG", "LEYAK: No hope is left for you!");
-let demon3 = new Demon ("LILITH", 150, 150, 40, 50, "../Images/3.3.1.PNG", "../Images/3.3.2.PNG", "../Images/3.3.3.PNG", "LILITH: Prepare your soul for darkness...");
+let demon1 = new Demon ("LUCIFER", 110, 110, 50, 30, "../Images/3.1.1.PNG", "../Images/3.1.2.PNG", "../Images/3.1.3.PNG", "../Images/3.1.victory.PNG", "../Images/3.1.dead.PNG", "LUCIFER: Your time has come to burn eternally.");
+let demon2 = new Demon ("LEYAK", 80, 80, 60, 0, "../Images/3.2.1.PNG", "../Images/3.2.2.PNG", "../Images/3.2.3.PNG", "../Images/3.2.victory.PNG", "../Images/3.2.dead.PNG", "LEYAK: No hope is left for you!");
+let demon3 = new Demon ("LILITH", 150, 150, 40, 50, "../Images/3.3.1.PNG", "../Images/3.3.2.PNG", "../Images/3.3.3.PNG", "../Images/3.3.victory.PNG", "../Images/3.3.dead.PNG", "LILITH: Prepare your soul for darkness...");
 
 //Demons to pick & image & properties to load - activation in "activation" function
 let player1Demon = 0; // 1, 2 o 3 depending on character
@@ -132,7 +134,8 @@ function activateDuel() {
 function activateActionP1(player, option){
   console.log("P1")
   imgDemonPlayer1.classList.add("characterSelected") // Player picked an option to DUEL
-  if (player == 1 && option == 1){player1DemonObj.duelOption = "fire"}
+  if (((player == 1) && (option == 1)) && (player1DemonObj.ammo > 0)){player1DemonObj.duelOption = "fire"}
+  if ((player == 1) && (option == 1) && (player1DemonObj.ammo <= 0)){player1DemonObj.duelOption = "noAmmo"}
   else if (player == 1 && option == 2){player1DemonObj.duelOption = "load"}
   else if (player == 1 && option == 3){player1DemonObj.duelOption = "shield"}
 
@@ -143,7 +146,8 @@ function activateActionP1(player, option){
 function activateActionP2(player, option){
   console.log("P2")
   imgDemonPlayer2.classList.add("characterSelected") // Player picked an option to DUEL
-  if (player == 2 && option == 1){player2DemonObj.duelOption = "fire"}
+  if (((player == 2) && (option == 1)) && (player1DemonObj.ammo > 0)){player2DemonObj.duelOption = "fire"}
+  if ((player == 2) && (option == 1) && (player1DemonObj.ammo <= 0)){player2DemonObj.duelOption = "noAmmo"}
   else if (player == 2 && option == 2){player2DemonObj.duelOption = "load"}
   else if (player == 2 && option == 3){player2DemonObj.duelOption = "shield"}
 
@@ -156,119 +160,223 @@ function activateActionP2(player, option){
 //DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ----
 //Both characters must choose a duel option
 function duel(){
-  // FIRE vs FIRE --------------------------------------------------------------------
-  if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "fire")){
+
+// FIRE vs NoAmmo --------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "fire")){
+  player1DemonObj.health -= player2DemonObj.attack;
+  player2DemonObj.ammo -= 1;
+  player1DemonObj.state = "F**** shit... forgot to load the gun!";
+  player2DemonObj.state = "Take this bullet MF!";
+
+  //P1 health update
+  if ((player1DemonObj.health > (player1DemonObj.healthOrigin * 0.3)) && (player1DemonObj.health < (player1DemonObj.healthOrigin * 0.6))){
+    imgDemonPlayer1.src = player1DemonObj.img60 //image state 2
+  }
+  else if ((player1DemonObj.health > 0) && (player1DemonObj.health <= (player1DemonObj.healthOrigin * 0.3))){
+    imgDemonPlayer1.src = player1DemonObj.img30 //image state 3
+  }
+  else if (player1DemonObj.health <= 0){
+    imgDemonPlayer1.src = player1DemonObj.imgDead //image state Dead
+    imgDemonPlayer2.src = player2DemonObj.imgWin //image state Win
+    player1DemonObj.state = "...";
+    player2DemonObj.state = "I WIN you piece of shit!";
+  }
+}
+if ((player2DemonObj.duelOption == "noAmmo") && (player1DemonObj.duelOption == "fire")){
+  player2DemonObj.health -= player1DemonObj.attack;
+  player1DemonObj.ammo -= 1;
+  player2DemonObj.state = "F**** shit... forgot to load the gun!";
+  player1DemonObj.state = "Take this bullet MF!";
+  //P2 health update
+  if ((player2DemonObj.health > (player2DemonObj.healthOrigin * 0.3)) && (player2DemonObj.health < (player2DemonObj.healthOrigin * 0.6))){
+    imgDemonPlayer2.src = player2DemonObj.img60 //image state 2
+  }
+  else if ((player2DemonObj.health > 0) && (player2DemonObj.health <= (player2DemonObj.healthOrigin * 0.3))){
+    imgDemonPlayer2.src = player2DemonObj.img30 //image state 3
+  }
+  else if (player2DemonObj.health <= 0){
+    imgDemonPlayer2.src = player2DemonObj.imgDead //image state Dead
+    imgDemonPlayer1.src = player1DemonObj.imgWin //image state Win
+    player2DemonObj.state = "...";
+    player1DemonObj.state = "I WIN you piece of shit!";
+  }
+}
+
+// NoAmmo vs SHIELD --------------------------------------------------------------------
+if (((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "shield")) || ((player2DemonObj.duelOption == "noAmmo") && (player1DemonObj.duelOption == "shield"))){
+  player1DemonObj.state = "Nothing fuckin' happened...";
+  player2DemonObj.state = "Nothing fuckin' happened...";
+}
+
+// NoAmmo vs LOAD ---------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "load")){
+  player2DemonObj.ammo += 1;
+  player1DemonObj.state = "F**** shit... forgot to load the gun!";
+  player2DemonObj.state = "One more bullet to put in your skull...";
+}
+
+else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "noAmmo")){
+  player1DemonObj.ammo += 1;
+  player2DemonObj.state = "F**** shit... forgot to load the gun!";
+  player1DemonObj.state = "One more bullet to put in your skull...";
+}
+
+// NoAmmo vs NoAmmo ---------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "noAmmo")){
+  player1DemonObj.state = "F**** shit... forgot to load the gun!";
+  player2DemonObj.state = "F**** shit... forgot to load the gun!";
+}
+
+// FIRE vs FIRE --------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "fire")){
     player1DemonObj.health -= player2DemonObj.attack;
     player1DemonObj.ammo -= 1;
     player2DemonObj.health -= player1DemonObj.attack;
     player2DemonObj.ammo -= 1;
-    //P1 health update
-    if ((player1DemonObj.health > (player1DemonObj.healthOrigin * 0.3)) && (player1DemonObj.health < (player1DemonObj.healthOrigin * 0.6))){
+    player2DemonObj.state = "Take this bullet MF!!";
+    player1DemonObj.state = "Take this bullet MF!";
+  //P1 health update
+  if ((player1DemonObj.health > (player1DemonObj.healthOrigin * 0.3)) && (player1DemonObj.health < (player1DemonObj.healthOrigin * 0.6))){
       imgDemonPlayer1.src = player1DemonObj.img60 //image state 2
     }
-    else if (player1DemonObj.health <= (player1DemonObj.healthOrigin * 0.3)){
+  else if ((player1DemonObj.health > 0) && (player1DemonObj.health <= (player1DemonObj.healthOrigin * 0.3))){
       imgDemonPlayer1.src = player1DemonObj.img30 //image state 3
     }
-    else if (player1DemonObj.health <= 0){
-      //WINNER PLAYER 2
+  else if (player1DemonObj.health <= 0){
+      imgDemonPlayer1.src = player1DemonObj.imgDead //image state Dead
+      imgDemonPlayer2.src = player2DemonObj.imgWin //image state Win
+      player1DemonObj.state = "...";
+      player2DemonObj.state = "I WIN you piece of shit!";
     }
 
-    //P2 health update
-    if ((player2DemonObj.health > (player2DemonObj.healthOrigin * 0.3)) && (player2DemonObj.health < (player2DemonObj.healthOrigin * 0.6))){
+  //P2 health update
+  if ((player2DemonObj.health > (player2DemonObj.healthOrigin * 0.3)) && (player2DemonObj.health < (player2DemonObj.healthOrigin * 0.6))){
       imgDemonPlayer2.src = player2DemonObj.img60 //image state 2
     }
-    else if (player2DemonObj.health <= (player2DemonObj.healthOrigin * 0.3)){
+  else if ((player2DemonObj.health > 0) && (player2DemonObj.health <= (player2DemonObj.healthOrigin * 0.3))){
       imgDemonPlayer2.src = player2DemonObj.img30 //image state 3
     }
-    else if (player2DemonObj.health <= 0){
-      //WINNER PLAYER 1
+  else if (player2DemonObj.health <= 0){
+      imgDemonPlayer2.src = player2DemonObj.imgDead //image state Dead
+      imgDemonPlayer1.src = player1DemonObj.imgWin //image state Win
+      player2DemonObj.state = "...";
+      player1DemonObj.state = "I WIN you piece of shit!";
     }
-  }
+}
 
-  // FIRE vs SHIELD --------------------------------------------------------------------
-  if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "shield")){
+// FIRE vs SHIELD --------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "shield")){
     player1DemonObj.ammo -= 1;
     player2DemonObj.health -= (player1DemonObj.attack * (player2DemonObj.shield / 100));
+    player2DemonObj.state = "Barely noticed it you sucker!";
+    player1DemonObj.state = "Take this bullet MF!";
 
     //P2 health update
     if ((player2DemonObj.health > (player2DemonObj.healthOrigin * 0.3)) && (player2DemonObj.health < (player2DemonObj.healthOrigin * 0.6))){
       imgDemonPlayer2.src = player2DemonObj.img60 //image state 2
     }
-    else if (player2DemonObj.health <= (player2DemonObj.healthOrigin * 0.3)){
+    else if ((player2DemonObj.health > 0) && (player2DemonObj.health <= (player2DemonObj.healthOrigin * 0.3))){
       imgDemonPlayer2.src = player2DemonObj.img30 //image state 3
     }
     else if (player2DemonObj.health <= 0){
-      //WINNER PLAYER 1
+      imgDemonPlayer2.src = player2DemonObj.imgDead //image state Dead
+      imgDemonPlayer1.src = player1DemonObj.imgWin //image state Win
+      player2DemonObj.state = "...";
+      player1DemonObj.state = "I WIN you piece of shit!";
     }
   }
-  if ((player2DemonObj.duelOption == "fire") && (player1DemonObj.duelOption == "shield")){
+if ((player2DemonObj.duelOption == "fire") && (player1DemonObj.duelOption == "shield")){
     player2DemonObj.ammo -= 1;
     player1DemonObj.health -= (player2DemonObj.attack * (player1DemonObj.shield / 100));
+    player1DemonObj.state = "Barely noticed it you sucker!";
+    player2DemonObj.state = "Take this bullet MF!";
 
-    //P1 health update
-    if ((player1DemonObj.health > (player1DemonObj.healthOrigin * 0.3)) && (player1DemonObj.health < (player1DemonObj.healthOrigin * 0.6))){
+  //P1 health update
+  if ((player1DemonObj.health > (player1DemonObj.healthOrigin * 0.3)) && (player1DemonObj.health < (player1DemonObj.healthOrigin * 0.6))){
       imgDemonPlayer1.src = player1DemonObj.img60 //image state 2
     }
-    else if (player1DemonObj.health <= (player1DemonObj.healthOrigin * 0.3)){
+  else if ((player1DemonObj.health > 0) && (player1DemonObj.health <= (player1DemonObj.healthOrigin * 0.3))){
       imgDemonPlayer1.src = player1DemonObj.img30 //image state 3
     }
-    else if (player1DemonObj.health <= 0){
-      //WINNER PLAYER 2
+  else if (player1DemonObj.health <= 0){
+      imgDemonPlayer1.src = player1DemonObj.imgDead //image state Dead
+      imgDemonPlayer2.src = player2DemonObj.imgWin //image state Win
+      player1DemonObj.state = "...";
+      player2DemonObj.state = "I WIN you piece of shit!";
     }
   }
 
-  // FIRE vs LOAD ---------------------------------------------------------------------
-  if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "load")){
+// FIRE vs LOAD ---------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "load")){
     player1DemonObj.ammo -= 1;
     player2DemonObj.ammo += 1;
     player2DemonObj.health -= player1DemonObj.attack;
+    player2DemonObj.state = "One more bullet to put in your skull...";
+    player1DemonObj.state = "Take this bullet MF!";
 
-    //P2 health update
-    if ((player2DemonObj.health > (player2DemonObj.healthOrigin * 0.3)) && (player2DemonObj.health < (player2DemonObj.healthOrigin * 0.6))){
+  //P2 health update
+  if ((player2DemonObj.health > (player2DemonObj.healthOrigin * 0.3)) && (player2DemonObj.health < (player2DemonObj.healthOrigin * 0.6))){
       imgDemonPlayer2.src = player2DemonObj.img60 //image state 2
     }
-    else if (player2DemonObj.health <= (player2DemonObj.healthOrigin * 0.3)){
+  else if ((player2DemonObj.health > 0) && (player2DemonObj.health <= (player2DemonObj.healthOrigin * 0.3))){
       imgDemonPlayer2.src = player2DemonObj.img30 //image state 3
     }
-    else if (player2DemonObj.health <= 0){
-      //WINNER PLAYER 1
+  else if (player2DemonObj.health <= 0){
+      imgDemonPlayer2.src = player2DemonObj.imgDead //image state Dead
+      imgDemonPlayer1.src = player1DemonObj.imgWin //image state Win
+      player2DemonObj.state = "...";
+      player1DemonObj.state = "I WIN you piece of shit!";
     }
-  }
+}
 
-  if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "fire")){
+if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "fire")){
     player2DemonObj.ammo -= 1;
     player1DemonObj.ammo += 1;
     player1DemonObj.health -= player2DemonObj.attack;
+    player1DemonObj.state = "One more bullet to put in your skull...";
+    player2DemonObj.state = "Take this bullet MF!";
 
-    //P1 health update
-    if ((player1DemonObj.health > (player1DemonObj.healthOrigin * 0.3)) && (player1DemonObj.health < (player1DemonObj.healthOrigin * 0.6))){
+  //P1 health update
+  if ((player1DemonObj.health > (player1DemonObj.healthOrigin * 0.3)) && (player1DemonObj.health < (player1DemonObj.healthOrigin * 0.6))){
       imgDemonPlayer1.src = player1DemonObj.img60 //image state 2
     }
-    else if (player1DemonObj.health <= (player1DemonObj.healthOrigin * 0.3)){
+  else if ((player1DemonObj.health > 0) && (player1DemonObj.health <= (player1DemonObj.healthOrigin * 0.3))){
       imgDemonPlayer1.src = player1DemonObj.img30 //image state 3
     }
-    else if (player1DemonObj.health <= 0){
-      //WINNER PLAYER 2
+  else if (player1DemonObj.health <= 0){
+      imgDemonPlayer1.src = player1DemonObj.imgDead //image state Dead
+      imgDemonPlayer2.src = player2DemonObj.imgWin //image state Win
+      player1DemonObj.state = "...";
+      player2DemonObj.state = "I WIN you piece of shit!";
     }
-  }
+}
 
-  // SHIELD vs LOAD ----------------------------------------------------------------------
-  if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "load")){
+// SHIELD vs LOAD ----------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "load")){
     player2DemonObj.ammo += 1;
-  }
-  if ((player2DemonObj.duelOption == "shield") && (player1DemonObj.duelOption == "load")){
+    player2DemonObj.state = "One more bullet to put in your skull...";
+    player1DemonObj.state = "I shielded while you loaded... I suck!";
+}
+if ((player2DemonObj.duelOption == "shield") && (player1DemonObj.duelOption == "load")){
     player1DemonObj.ammo += 1;
-  }
+    player1DemonObj.state = "One more bullet to put in your skull...";
+    player2DemonObj.state = "I shielded while you loaded... I suck!";
+}
 
-  // SHIELD vs SHIELD --------------------------------------------------------------------
-  if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "shield")){}
+// SHIELD vs SHIELD --------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "shield")){
+  player1DemonObj.state = "We both shielded... so stupid";
+  player2DemonObj.state = "We both shielded... so stupid";
+}
 
-  // LOAD vs LOAD ------------------------------------------------------------------------
-  if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "load")){
+// LOAD vs LOAD ------------------------------------------------------------------------
+if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "load")){
     player1DemonObj.ammo += 1;
     player2DemonObj.ammo += 1;
-  }
-  //--------------------------------------------------------------------------------------
+    player1DemonObj.state = "One more bullet to put in your skull...";
+    player2DemonObj.state = "One more bullet to put in your skull...";
+}
+//--------------------------------------------------------------------------------------
   
   document.getElementById("healthP1").innerHTML = player1DemonObj.health
   document.getElementById("ammoP1").innerHTML = player1DemonObj.ammo
@@ -282,8 +390,19 @@ function duel(){
   player2DemonObj.duelOption = "";
   imgDemonPlayer1.classList.remove("characterSelected");
   imgDemonPlayer2.classList.remove("characterSelected");
+
+  if ((player1DemonObj.health <= 0) || (player2DemonObj.health <= 0)){
+    imgDemonPlayer1.addEventListener("click", restartGame);
+    imgDemonPlayer2.addEventListener("click", restartGame);
+  }
+
   // console.log(player1DemonObj)
   // console.log(player2DemonObj)
+}
+
+function restartGame(){
+  duelScreenDiv.remove();
+  bodyforDom.appendChild(pickCharacterScreen);
 }
 
 
