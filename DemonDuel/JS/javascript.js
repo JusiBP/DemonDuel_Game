@@ -18,15 +18,44 @@ class Demon {
   }
 
 //Character definition - objects (properties defined)
-let demon1 = new Demon ("LUCIFER", 110, 110, 50, 30, "../Images/3.1.1.PNG", "../Images/3.1.2.PNG", "../Images/3.1.3.PNG", "../Images/3.1.victory.PNG", "../Images/3.1.dead.PNG", "LUCIFER: Your time has come to burn eternally.");
-let demon2 = new Demon ("LEYAK", 80, 80, 60, 0, "../Images/3.2.1.PNG", "../Images/3.2.2.PNG", "../Images/3.2.3.PNG", "../Images/3.2.victory.PNG", "../Images/3.2.dead.PNG", "LEYAK: No hope is left for you!");
-let demon3 = new Demon ("LILITH", 150, 150, 40, 50, "../Images/3.3.1.PNG", "../Images/3.3.2.PNG", "../Images/3.3.3.PNG", "../Images/3.3.victory.PNG", "../Images/3.3.dead.PNG", "LILITH: Prepare your soul for darkness...");
+const demon1 = new Demon ("LUCIFER", 110, 110, 50, 30, "../Images/3.1.1.PNG", "../Images/3.1.2.PNG", "../Images/3.1.3.PNG", "../Images/3.1.victory.PNG", "../Images/3.1.dead.PNG", "LUCIFER: Your time has come to burn eternally.");
+const demon2 = new Demon ("LEYAK", 80, 80, 60, 0, "../Images/3.2.1.PNG", "../Images/3.2.2.PNG", "../Images/3.2.3.PNG", "../Images/3.2.victory.PNG", "../Images/3.2.dead.PNG", "LEYAK: No hope is left for you!");
+const demon3 = new Demon ("LILITH", 150, 150, 40, 50, "../Images/3.3.1.PNG", "../Images/3.3.2.PNG", "../Images/3.3.3.PNG", "../Images/3.3.victory.PNG", "../Images/3.3.dead.PNG", "LILITH: Prepare your soul for darkness...");
 
 //Demons to pick & image & properties to load - activation in "activation" function
 let player1Demon = 0; // 1, 2 o 3 depending on character
 let player2Demon = 0; // (same as above)
 let player1DemonObj = 0; // Object (demon) to use during DUEL
 let player2DemonObj = 0; // (same as above)
+
+//DuelCombos
+// if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "fire")){duelCombo1()} // P1: fire - P2: fire
+// else if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "noAmmo")){duelCombo2()} // P1: noAmmo - P2: noAmmo
+// else if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "shield")){duelCombo3()} // P1: shield - P2: shield
+// else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "load")){duelCombo4()} // P1: load - P2: load
+// else if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "noAmmo")){duelCombo5()} // P1: fire - P2: noAmmo
+// else if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "shield")){duelCombo6()} // P1: fire - P2: shield
+// else if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "load")){duelCombo7()} // P1: fire - P2: load
+// else if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "fire")){duelCombo8()} // P1: noAmmo - P2: fire
+// else if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "shield")){duelCombo9()} // P1: noAmmo - P2: shield
+// else if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "load")){duelCombo10()} // P1: noAmmo - P2: load
+// else if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "fire")){duelCombo11()} // P1: shield - P2: fire
+// else if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "noAmmo")){duelCombo12()} // P1: shield - P2: noAmmo
+// else if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "load")){duelCombo13()} // P1: shield - P2: load
+// else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "fire")){duelCombo14()} // P1: load - P2: fire
+// else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "noAmmo")){duelCombo15()} // P1: load - P2: noAmmo
+// else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "shield")){duelCombo16()} // P1: load - P2: shield
+
+//Logs
+const log1 = "F**** shit... forgot to load the gun!"; //noAmmo
+const log2 = "Take this bullet MF!"; //fire
+const log3 = "One more bullet to put in your skull..."; //load
+const log4 = "Barely noticed it you sucker!"; //shield
+const log5 = "Nothing fuckin' happened..."; //noAmmo && shield  
+const log6 = "I shielded while you loaded... I suck!"; //shield && load
+const log7 = "We both shielded... so dumb"; //shield && shield
+const logDie = "..."; //die (this.demon health =< 0)
+const logWin = "I WIN you piece of shit!"; //win (opponent demon health =< 0)
 
 // DOM ------------------------------------------------------------------------------------------------------------
 let bodyforDom = document.getElementById('bodyBlock'); //Body DOM.
@@ -139,31 +168,85 @@ function activateDuel() {
 function activateActionP1(player, option){
   imgDemonPlayer1.classList.add("characterSelected") // Character highlighted (duel option picked)
   if (((player == 1) && (option == 1)) && (player1DemonObj.ammo > 0)){player1DemonObj.duelOption = "fire"}
-  if ((player == 1) && (option == 1) && (player1DemonObj.ammo <= 0)){player1DemonObj.duelOption = "noAmmo"}
+  else if ((player == 1) && (option == 1) && (player1DemonObj.ammo <= 0)){player1DemonObj.duelOption = "noAmmo"}
   else if (player == 1 && option == 2){player1DemonObj.duelOption = "load"}
   else if (player == 1 && option == 3){player1DemonObj.duelOption = "shield"}
 
   if ((player1DemonObj.duelOption.length > 0) && (player2DemonObj.duelOption.length > 0)){
-    duel()
+    duelPicker()
   }
 }
 function activateActionP2(player, option){
   imgDemonPlayer2.classList.add("characterSelected") // Character highlighted (duel option picked)
   if (((player == 2) && (option == 1)) && (player1DemonObj.ammo > 0)){player2DemonObj.duelOption = "fire"}
-  if ((player == 2) && (option == 1) && (player1DemonObj.ammo <= 0)){player2DemonObj.duelOption = "noAmmo"}
+  else if ((player == 2) && (option == 1) && (player1DemonObj.ammo <= 0)){player2DemonObj.duelOption = "noAmmo"}
   else if (player == 2 && option == 2){player2DemonObj.duelOption = "load"}
   else if (player == 2 && option == 3){player2DemonObj.duelOption = "shield"}
 
   if ((player1DemonObj.duelOption.length > 0) && (player2DemonObj.duelOption.length > 0)){
-    duel()
+    duelPicker()
   }
 }
 
+//DuelCombos
+function duelPicker(){
+  if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "fire")){duelCombo1("fire","fire")} // P1: fire - P2: fire (UNIQUE)
+  else if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "noAmmo")){duelCombo2("noAmmo","noAmmo")} // P1: noAmmo - P2: noAmmo (UNIQUE)
+  else if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "shield")){duelCombo3("shield","shield")} // P1: shield - P2: shield (UNIQUE)
+  else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "load")){duelCombo4("load","load")} // P1: load - P2: load (UNIQUE)
+  else if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "noAmmo")){duelCombo5("fire","noAmmo")} // P1: fire - P2: noAmmo
+  else if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "shield")){duelCombo6("fire","shield")} // P1: fire - P2: shield
+  else if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "load")){duelCombo7("fire","load")} // P1: fire - P2: load
+  else if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "fire")){duelCombo5("noAmmo","fire")} // P1: noAmmo - P2: fire
+  else if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "shield")){duelCombo8("noAmmo","shield")} // P1: noAmmo - P2: shield
+  else if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "load")){duelCombo9("noAmmo","load")} // P1: noAmmo - P2: load
+  else if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "fire")){duelCombo6("shield","fire")} // P1: shield - P2: fire
+  else if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "noAmmo")){duelCombo8("shield","noAmmo")} // P1: shield - P2: noAmmo
+  else if ((player1DemonObj.duelOption == "shield") && (player2DemonObj.duelOption == "load")){duelCombo10("shield","load")} // P1: shield - P2: load
+  else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "fire")){duelCombo7("load","fire")} // P1: load - P2: fire
+  else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "noAmmo")){duelCombo9("load","noAmmo")} // P1: load - P2: noAmmo
+  else if ((player1DemonObj.duelOption == "load") && (player2DemonObj.duelOption == "shield")){duelCombo10("load","shield")} // P1: load - P2: shield
+  else {console.log("ERROR")}
+}
+
+//DUEL ------------------------------------------------------------------------------------------------------------------
+//DC 1 --> P1: fire - P2: fire (UNIQUE)
+function duelCombo1(actionP1, actionP2){} 
+
+//DC 2 --> P1: noAmmo - P2: noAmmo (UNIQUE)
+function duelCombo2(actionP1, actionP2){} 
+
+//DC 3 --> P1: shield - P2: shield (UNIQUE)
+function duelCombo3(actionP1, actionP2){} 
+
+//DC 4 --> P1: load - P2: load (UNIQUE)
+function duelCombo4(actionP1, actionP2){} 
+
+//DC 5 --> P1: fire - P2: noAmmo || P1: noAmmo - P2: fire
+function duelCombo5(actionP1, actionP2){} 
+
+//DC 6 --> P1: fire - P2: shield || P1: shield - P2: fire
+function duelCombo6(actionP1, actionP2){} 
+
+//DC 7 --> P1: fire - P2: load || P1: load - P2: fire
+function duelCombo7(actionP1, actionP2){} 
+
+//DC 8 --> P1: noAmmo - P2: shield || // P1: shield - P2: noAmmo
+function duelCombo8(actionP1, actionP2){} 
+
+//DC 9 --> P1: noAmmo - P2: load || P1: load - P2: noAmmo
+function duelCombo9(actionP1, actionP2){} 
+
+//DC 10 --> P1: shield - P2: load || P1: load - P2: shield
+function duelCombo10(actionP1, actionP2){} 
+
+
+
+
 
 //DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ---- DUEL ----
-//Both characters must choose a duel option
-function duel(){
 
+function duel () {
 // FIRE vs NoAmmo --------------------------------------------------------------------
 if ((player1DemonObj.duelOption == "noAmmo") && (player2DemonObj.duelOption == "fire")){
   player1DemonObj.health -= player2DemonObj.attack;
