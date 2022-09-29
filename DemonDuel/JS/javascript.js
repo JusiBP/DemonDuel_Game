@@ -28,13 +28,16 @@ let player2Demon = 0; // (same as above)
 let player1DemonObj = 0; // Object (demon) to use during DUEL
 let player2DemonObj = 0; // (same as above)
 
-// //Player Health Status
-// let p1Health60 = false;
-// let p1Health30 = false;
-// let p1HealthDead = false;
-// let p2Health60 = false;
-// let p2Health30 = false;
-// let p2HealthDead = false;
+//Music
+const bsoDuel = new Audio("/DemonDuel_Game/audio/dd_bso_duel.wav");
+bsoDuel.loop = true;
+bsoDuel.volume = 1;
+
+let bsoCharacter = new Audio("/DemonDuel_Game/audio/dd_bso_character.wav");
+bsoCharacter.loop = true;
+bsoCharacter.volume = 1;
+bsoCharacter.play();
+
 
 //Logs
 const log1 = "F**** shit... forgot to load the gun!"; //noAmmo
@@ -139,6 +142,8 @@ function activateDuel() {
   if((player1Demon !== 0) && (player2Demon !== 0)){
     pickCharacterScreen.remove(); // Pick your character screen - REMOVE whole block
     bodyforDom.appendChild(duelScreenDiv); // Duel screen - GENERATE whole block
+    bsoCharacter.pause();
+    bsoDuel.play();
 
     //PLAYER 1 - Inicializate character img, health, ammo & log
     imgDemonPlayer1.src = player1DemonObj.img100
@@ -164,9 +169,6 @@ function activateActionP1(player, option){
   if ((player1DemonObj.duelOption.length > 0) && (player2DemonObj.duelOption.length > 0)){
     duelPicker()
   }
-  // if ((player1DemonObj.duelOption.length > 0)){
-  //   player1Ready = true;
-  // }
 }
 function activateActionP2(player, option){
   imgDemonPlayer2.classList.add("characterSelected") // Character highlighted (duel option picked)
@@ -177,15 +179,8 @@ function activateActionP2(player, option){
   
   if ((player1DemonObj.duelOption.length > 0) && (player2DemonObj.duelOption.length > 0)){
     duelPicker()
-  }
-  // if ((player2DemonObj.duelOption.length > 0)){
-  //   player2Ready = true;
-  // }
+  } 
 }
-// if ((player1Ready == true) || (player2Ready == true)){
-// duelPicker();
-// }
-
 
 
 //DuelCombos
@@ -442,11 +437,14 @@ function updatePostDuel(){
 
 // Restart GAME once one player dies
 function restartGame(){
+  bsoDuel.pause()
+  bsoCharacter.play();
   duelScreenDiv.remove();
   bodyforDom.appendChild(pickCharacterScreen);
 }
 
   
+
 
 
 
