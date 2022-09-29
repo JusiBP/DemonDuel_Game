@@ -1,8 +1,9 @@
+// Character constructor:
 class Demon {
     constructor (name, health, healthOrigin, attack, shield, img100, img60, img30, imgWin, imgDead, state) {
       this.name = name;
-      this.health = health;
-      this.healthOrigin = healthOrigin
+      this.health = health; // Current Health
+      this.healthOrigin = healthOrigin // Original Health
       this.attack = attack;
       this.shield = shield;
       this.img100 = img100;
@@ -11,86 +12,87 @@ class Demon {
       this.imgWin = imgWin;
       this.imgDead = imgDead;
       this.ammo = 0;
-      this.state = state;
-      this.duelOption = ""; //Option picked in duel (fire, load, shield )
+      this.state = state; // Character Log
+      this.duelOption = ""; // fire, load, shield, noAmmo
     }
   }
-//Characters - objects (properties defined)
+
+//Character definition - objects (properties defined)
 let demon1 = new Demon ("LUCIFER", 110, 110, 50, 30, "../Images/3.1.1.PNG", "../Images/3.1.2.PNG", "../Images/3.1.3.PNG", "../Images/3.1.victory.PNG", "../Images/3.1.dead.PNG", "LUCIFER: Your time has come to burn eternally.");
 let demon2 = new Demon ("LEYAK", 80, 80, 60, 0, "../Images/3.2.1.PNG", "../Images/3.2.2.PNG", "../Images/3.2.3.PNG", "../Images/3.2.victory.PNG", "../Images/3.2.dead.PNG", "LEYAK: No hope is left for you!");
 let demon3 = new Demon ("LILITH", 150, 150, 40, 50, "../Images/3.3.1.PNG", "../Images/3.3.2.PNG", "../Images/3.3.3.PNG", "../Images/3.3.victory.PNG", "../Images/3.3.dead.PNG", "LILITH: Prepare your soul for darkness...");
 
 //Demons to pick & image & properties to load - activation in "activation" function
 let player1Demon = 0; // 1, 2 o 3 depending on character
-let player2Demon = 0; // same as above
-let player1DemonObj = 0; // Object to use during DUEL
-let player2DemonObj = 0; // same as above
+let player2Demon = 0; // (same as above)
+let player1DemonObj = 0; // Object (demon) to use during DUEL
+let player2DemonObj = 0; // (same as above)
+
+// DOM ------------------------------------------------------------------------------------------------------------
+let bodyforDom = document.getElementById('bodyBlock'); //Body DOM.
+let pickCharacterScreen = document.getElementById('pickCharacterBlock'); // Pick your character screen.
+let duelScreenDiv = document.getElementById("duelBlock") //Duel screen.
+
+let imgDemonPlayer1 = document.getElementById('imgDemonPlayer1'); //Image reproducing in duel screen (P1 character)
+let imgDemonPlayer2 = document.getElementById('imgDemonPlayer2'); //Image reproducing in duel screen (P2 character)
+
+let activDemon1P1 = document.getElementById('demon1P1'); //Pick your character screen - Demon1 (P1)
+let activDemon2P1 = document.getElementById('demon2P1'); //Pick your character screen - Demon2 (P1)
+let activDemon3P1 = document.getElementById('demon3P1'); //Pick your character screen - Demon3 (P1)
+let activDemon1P2 = document.getElementById('demon1P2'); //Pick your character screen - Demon1 (P1)
+let activDemon2P2 = document.getElementById('demon2P2'); //Pick your character screen - Demon2 (P2)
+let activDemon3P2 = document.getElementById('demon3P2'); //Pick your character screen - Demon3 (P2)
+
+let goDuel = document.getElementById('goDuel'); //Pick your character screen - DUEL button 
+
+activDemon1P1.addEventListener("click", () => {activateCharacter(1,1)}); //Pick your character screen - CLICK EVENT --> Demon1 (P1)
+activDemon2P1.addEventListener("click", () => {activateCharacter(1,2)}); //Pick your character screen - CLICK EVENT --> Demon2 (P1)
+activDemon3P1.addEventListener("click", () => {activateCharacter(1,3)}); //Pick your character screen - CLICK EVENT --> Demon3 (P1)
+activDemon1P2.addEventListener("click", () => {activateCharacter(2,1)}); //Pick your character screen - CLICK EVENT --> Demon1 (P2)
+activDemon2P2.addEventListener("click", () => {activateCharacter(2,2)}); //Pick your character screen - CLICK EVENT --> Demon2 (P2)
+activDemon3P2.addEventListener("click", () => {activateCharacter(2,3)}); //Pick your character screen - CLICK EVENT --> Demon3 (P2)
+
+let fireP1 = document.getElementById('fireP1'); //Duel screen - Fire (P1)
+let loadP1 = document.getElementById('loadP1'); //Duel screen - Load (P1)
+let shieldP1 = document.getElementById('shieldP1'); //Duel screen - Shield (P1)
+let fireP2 = document.getElementById('fireP2'); //Duel screen - Fire (P2)
+let loadP2 = document.getElementById('loadP2'); //Duel screen - Load (P2)
+let shieldP2 = document.getElementById('shieldP2'); //Duel screen - Shield (P2)
+
+fireP1.addEventListener("click", () => {activateActionP1(1,1)}); //Duel screen - CLICK EVENT --> Fire (P1)
+fireP2.addEventListener("click", () => {activateActionP2(2,1)}); //Duel screen - CLICK EVENT --> Fire (P2)
+loadP1.addEventListener("click", () => {activateActionP1(1,2)}); //Duel screen - CLICK EVENT --> Load (P1)
+loadP2.addEventListener("click", () => {activateActionP2(2,2)}); //Duel screen - CLICK EVENT --> Load (P2)
+shieldP1.addEventListener("click", () => {activateActionP1(1,3)}); //Duel screen - CLICK EVENT --> Shield (P1)
+shieldP2.addEventListener("click", () => {activateActionP2(2,3)}); //Duel screen - CLICK EVENT --> Shield (P2)
+
+duelScreenDiv.remove(); //Duel Screen REMOVE (until goDuel event happens [pickCharacterScreen.remove()].)
+
+//----------------------------------------------------------------------------------------------------------------
 
 
-//Pick your character screen & body DOM
-let pickCharacterScreen = document.getElementById('pickCharacterBlock');
-let bodyforDom = document.getElementById('bodyBlock');
-
-//Duel Options & click to enable character picking
-let duelScreenDiv = document.getElementById("duelBlock")
-
-let fireP1 = document.getElementById('fireP1');
-let loadP1 = document.getElementById('loadP1');
-let shieldP1 = document.getElementById('shieldP1');
-let fireP2 = document.getElementById('fireP2');
-let loadP2 = document.getElementById('loadP2');
-let shieldP2 = document.getElementById('shieldP2');
-
-fireP1.addEventListener("click", () => {activateActionP1(1,1)});
-fireP2.addEventListener("click", () => {activateActionP2(2,1)});
-loadP1.addEventListener("click", () => {activateActionP1(1,2)});
-loadP2.addEventListener("click", () => {activateActionP2(2,2)});
-shieldP1.addEventListener("click", () => {activateActionP1(1,3)});
-shieldP2.addEventListener("click", () => {activateActionP2(2,3)});
-
-let imgDemonPlayer1 = document.getElementById('imgDemonPlayer1'); //Image reproducing in duel screen (character)
-let imgDemonPlayer2 = document.getElementById('imgDemonPlayer2'); //Image reproducing in duel screen (character)
-
-duelScreenDiv.remove();
-
-
-//Pick your character screen (P1 & P2 - characters id) & click to enable character picking
-let activDemon1P1 = document.getElementById('demon1P1');
-let activDemon2P1 = document.getElementById('demon2P1');
-let activDemon3P1 = document.getElementById('demon3P1');
-let activDemon1P2 = document.getElementById('demon1P2');
-let activDemon2P2 = document.getElementById('demon2P2');
-let activDemon3P2 = document.getElementById('demon3P2');
-
-activDemon1P1.addEventListener("click", () => {activateCharacter(1,1)});
-activDemon2P1.addEventListener("click", () => {activateCharacter(1,2)});
-activDemon3P1.addEventListener("click", () => {activateCharacter(1,3)});
-activDemon1P2.addEventListener("click", () => {activateCharacter(2,1)});
-activDemon2P2.addEventListener("click", () => {activateCharacter(2,2)});
-activDemon3P2.addEventListener("click", () => {activateCharacter(2,3)});
-
-//INICIALIZATION CHARACTER FOR DUEL (FUNCTIONS) -------------------
+// INICIALIZATION CHARACTER FOR DUEL (PICK YOUR CHARACTER SCREEN):
 function activateCharacter(player, demon) {
   if(player == 1){
-    activDemon1P1.classList.remove("characterSelected");
-    activDemon2P1.classList.remove("characterSelected");
-    activDemon3P1.classList.remove("characterSelected");
+    activDemon1P1.classList.remove("characterSelected"); // Character picked errase highlighting
+    activDemon2P1.classList.remove("characterSelected"); // ..
+    activDemon3P1.classList.remove("characterSelected"); // ..
     player1Demon = demon;
     if(demon == 1){
-      activDemon1P1.classList.add("characterSelected");
-      player1DemonObj = {...demon1};
+      activDemon1P1.classList.add("characterSelected"); // Character picked highlighted
+      player1DemonObj = {...demon1}; //Clone Demon1 object (so both players can pick the same character)
     }
     else if (demon == 2){
-      activDemon2P1.classList.add("characterSelected");
-      player1DemonObj = {...demon2};
+      activDemon2P1.classList.add("characterSelected"); // Character picked highlighted
+      player1DemonObj = {...demon2}; //Clone Demon2 object (so both players can pick the same character)
     }
     else {
-      activDemon3P1.classList.add("characterSelected");
-      player1DemonObj = {...demon3};
+      activDemon3P1.classList.add("characterSelected"); // Character picked highlighted
+      player1DemonObj = {...demon3}; //Clone Demon2 object (so both players can pick the same character)
     }
   }
   else if (player == 2){
-    activDemon1P2.classList.remove("characterSelected");
+    activDemon1P2.classList.remove("characterSelected"); // Same as before (for PLAYER 2)
     activDemon2P2.classList.remove("characterSelected");
     activDemon3P2.classList.remove("characterSelected");
     player2Demon = demon;
@@ -109,21 +111,23 @@ function activateCharacter(player, demon) {
   }
 }
 
-//goDuel button in pick your character screen. --> takes us to DUEL screen.
-//P1 & P2 must have picked character
-let goDuel = document.getElementById('goDuel');
-goDuel.addEventListener("click", activateDuel);
 
+goDuel.addEventListener("click", activateDuel); // Pick your character screen - CLICK EVENT --> DUEL Button
+
+
+//PLAYER 1 & PLAYER 2 - Inicializate character img, health, ammo & log in DUEL SCREEN
 function activateDuel() {
   if((player1Demon !== 0) && (player2Demon !== 0)){
-    pickCharacterScreen.remove();
-    bodyforDom.appendChild(duelScreenDiv);
+    pickCharacterScreen.remove(); // Pick your character screen - REMOVE whole block
+    bodyforDom.appendChild(duelScreenDiv); // Duel screen - GENERATE whole block
 
+    //PLAYER 1 - Inicializate character img, health, ammo & log
     imgDemonPlayer1.src = player1DemonObj.img100
     document.getElementById("healthP1").innerHTML = player1DemonObj.health
     document.getElementById("ammoP1").innerHTML = player1DemonObj.ammo
     document.getElementById("logP1").innerHTML = player1DemonObj.state
 
+    //PLAYER 2 - Inicializate character img, health, ammo & log
     imgDemonPlayer2.src = player2DemonObj.img100
     document.getElementById("healthP2").innerHTML = player2DemonObj.health
     document.getElementById("ammoP2").innerHTML = player2DemonObj.ammo
@@ -131,9 +135,9 @@ function activateDuel() {
   }
 }
 
+
 function activateActionP1(player, option){
-  console.log("P1")
-  imgDemonPlayer1.classList.add("characterSelected") // Player picked an option to DUEL
+  imgDemonPlayer1.classList.add("characterSelected") // Character highlighted (duel option picked)
   if (((player == 1) && (option == 1)) && (player1DemonObj.ammo > 0)){player1DemonObj.duelOption = "fire"}
   if ((player == 1) && (option == 1) && (player1DemonObj.ammo <= 0)){player1DemonObj.duelOption = "noAmmo"}
   else if (player == 1 && option == 2){player1DemonObj.duelOption = "load"}
@@ -144,8 +148,7 @@ function activateActionP1(player, option){
   }
 }
 function activateActionP2(player, option){
-  console.log("P2")
-  imgDemonPlayer2.classList.add("characterSelected") // Player picked an option to DUEL
+  imgDemonPlayer2.classList.add("characterSelected") // Character highlighted (duel option picked)
   if (((player == 2) && (option == 1)) && (player1DemonObj.ammo > 0)){player2DemonObj.duelOption = "fire"}
   if ((player == 2) && (option == 1) && (player1DemonObj.ammo <= 0)){player2DemonObj.duelOption = "noAmmo"}
   else if (player == 2 && option == 2){player2DemonObj.duelOption = "load"}
