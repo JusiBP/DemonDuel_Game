@@ -23,8 +23,8 @@ let demon3 = new Demon ("LILITH", 150, 150, 40, 50, "../Images/3.3.1.PNG", "../I
 //Demons to pick & image & properties to load - activation in "activation" function
 let player1Demon = 0; // 1, 2 o 3 depending on character
 let player2Demon = 0; // same as above
-let player1DemonObj; // Object to use during DUEL
-let player2DemonObj; // same as above
+let player1DemonObj = 0; // Object to use during DUEL
+let player2DemonObj = 0; // same as above
 
 
 //Pick your character screen & body DOM
@@ -118,8 +118,8 @@ function activateDuel() {
   if((player1Demon !== 0) && (player2Demon !== 0)){
     pickCharacterScreen.remove();
     bodyforDom.appendChild(duelScreenDiv);
-    imgDemonPlayer1.src = player1DemonObj.img100
 
+    imgDemonPlayer1.src = player1DemonObj.img100
     document.getElementById("healthP1").innerHTML = player1DemonObj.health
     document.getElementById("ammoP1").innerHTML = player1DemonObj.ammo
     document.getElementById("logP1").innerHTML = player1DemonObj.state
