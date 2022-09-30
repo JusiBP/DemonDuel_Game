@@ -1,3 +1,7 @@
+// if problems when openening in browser check:
+// JS ref in DemonDuel HTML
+// audio ref in JS
+
 // Character constructor:
 class Demon {
     constructor (name, health, healthOrigin, attack, shield, img100, img60, img30, imgWin, imgDead, state) {
@@ -29,11 +33,11 @@ let player1DemonObj = 0; // Object (demon) to use during DUEL
 let player2DemonObj = 0; // (same as above)
 
 //Music
-const bsoDuel = new Audio("/DemonDuel_Game/audio/dd_bso_duel.wav");
+const bsoDuel = new Audio("/audio/dd_bso_duel.wav");
 bsoDuel.loop = true;
 bsoDuel.volume = 1;
 
-let bsoCharacter = new Audio("/DemonDuel_Game/audio/dd_bso_character.wav");
+let bsoCharacter = new Audio("/audio/dd_bso_character.wav");
 bsoCharacter.loop = true;
 bsoCharacter.volume = 1;
 bsoCharacter.play();

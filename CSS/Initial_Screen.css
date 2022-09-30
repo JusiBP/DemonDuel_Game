@@ -35,3 +35,29 @@ body {
 .anchor:active {
     transform: scale(0.9);
 }
+
+.logo {
+    width: 4vw;
+    margin-bottom: 200px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.logos {
+    /* width: 15vw;
+    height: 3vh;
+    margin-bottom: 200px;*/
+    margin-top: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.logos:hover {
+    transform: scale(1.1);
+}
+
+.logos:active {
+    transform: scale(0.9);
+}
