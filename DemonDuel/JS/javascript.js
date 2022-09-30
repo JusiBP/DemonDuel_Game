@@ -33,11 +33,13 @@ let player1DemonObj = 0; // Object (demon) to use during DUEL
 let player2DemonObj = 0; // (same as above)
 
 //Music
-const bsoDuel = new Audio("/audio/dd_bso_duel.wav");
+const bsoDuel = new Audio("../audio/dd_bso_duel.wav");
+// const bsoDuel = document.createElement("audio")
+// bsoDuel.src = "../audio/dd_bso_duel.wav"
 bsoDuel.loop = true;
 bsoDuel.volume = 1;
 
-let bsoCharacter = new Audio("/audio/dd_bso_character.wav");
+let bsoCharacter = new Audio("../audio/dd_bso_character.wav");
 bsoCharacter.loop = true;
 bsoCharacter.volume = 1;
 bsoCharacter.play();
