@@ -419,8 +419,8 @@ function checkHealth(){
   updatePostDuel()
 
   if ((player1DemonObj.health <= 0) || (player2DemonObj.health <= 0)){
-    imgDemonPlayer1.src.addEventListener("click", restartGame);
-    imgDemonPlayer2.src.addEventListener("click", restartGame);
+    imgDemonPlayer1.addEventListener("click", restartGame);
+    imgDemonPlayer2.addEventListener("click", restartGame);
   }
 }
 
