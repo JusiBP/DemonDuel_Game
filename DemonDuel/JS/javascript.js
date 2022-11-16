@@ -191,9 +191,6 @@ function activateActionP2(player, option){
 
 //DuelCombos
 function duelPicker(){
-  console.log("P1 OPTION: " + player1DemonObj.duelOption)
-  console.log("P2 OPTION: " + player2DemonObj.duelOption)
-
   if ((player1DemonObj.duelOption == "fire") && (player2DemonObj.duelOption == "fire")){
     duelCombo1(player1DemonObj,player2DemonObj)
   } // P1: fire - P2: fire (UNIQUE)
@@ -242,13 +239,11 @@ function duelPicker(){
   else if ((player2DemonObj.duelOption == "shield") && (player1DemonObj.duelOption == "load")){
     duelCombo10(player2DemonObj,player1DemonObj)
   } // P2: shield - P1: load
-  else {console.log("ERROR")}
 }
 
 //DUEL ------------------------------------------------------------------------------------------------------------------
 //DC 1 --> P1: fire - P2: fire (UNIQUE)
 function duelCombo1(p1,p2){
-  console.log("FIRE FIRE")
   p1.health -= p2.attack;
   p1.ammo -= 1;
   p2.health -= p1.attack;
@@ -261,7 +256,6 @@ function duelCombo1(p1,p2){
 
 //DC 2 --> P1: noAmmo - P2: noAmmo (UNIQUE)
 function duelCombo2(p1,p2){
-  console.log("N.A N.A")
   p1.state = log1;
   p2.state = log1;
 
@@ -270,7 +264,6 @@ function duelCombo2(p1,p2){
 
 //DC 3 --> P1: shield - P2: shield (UNIQUE)
 function duelCombo3(p1,p2){
-  console.log("SHIELD SHIELD")
   p1.state = log7;
   p2.state = log7;
 
@@ -279,7 +272,6 @@ function duelCombo3(p1,p2){
 
 //DC 4 --> P1: load - P2: load (UNIQUE)
 function duelCombo4(p1,p2){
-  console.log("LOAD LOAD")
   p1.ammo += 1;
   p2.ammo += 1;
   p1.state = log3;
@@ -290,7 +282,6 @@ function duelCombo4(p1,p2){
 
 //DC 5 --> P1: fire - P2: noAmmo || P1: noAmmo - P2: fire
 function duelCombo5(p1,p2){
-  console.log("FIRE AMMO")
   if (p1.duelOption == "noAmmo"){
     p1.health -= p2.attack;
   p2.ammo -= 1;
@@ -308,7 +299,6 @@ function duelCombo5(p1,p2){
 
 //DC 6 --> P1: fire - P2: shield || P1: shield - P2: fire
 function duelCombo6(p1,p2){
-  console.log("FIRE SHIELD")
   if (p1.duelOption == "fire"){
     p1.ammo -= 1;
     p2.health -= (p1.attack * (p2.shield / 100));
@@ -326,7 +316,6 @@ function duelCombo6(p1,p2){
 
 //DC 7 --> P1: fire - P2: load || P1: load - P2: fire
 function duelCombo7(p1,p2){
-  console.log("FIRE LOAD")
   if (p1.duelOption == "fire"){
     p1.ammo -= 1;
     p2.ammo += 1;
@@ -346,7 +335,6 @@ function duelCombo7(p1,p2){
 
 //DC 8 --> P1: noAmmo - P2: shield || // P1: shield - P2: noAmmo
 function duelCombo8(p1,p2){
-  console.log("N.A SHIELD")
   p1.state = log5;
   p2.state = log5;
 
@@ -355,7 +343,6 @@ function duelCombo8(p1,p2){
 
 //DC 9 --> P1: noAmmo - P2: load || P1: load - P2: noAmmo
 function duelCombo9(p1,p2){
-  console.log("N.A LOAD")
   if (p1.duelOption == "load"){
     p1.ammo += 1;
     p2.state = log1;
@@ -372,7 +359,6 @@ function duelCombo9(p1,p2){
 
 //DC 10 --> P1: shield - P2: load || P1: load - P2: shield
 function duelCombo10(p1,p2){
-  console.log("SHIELD LOAD")
   if (p1.duelOption == "load"){
     p1.ammo += 1;
     p1.state = log3;
@@ -389,7 +375,6 @@ function duelCombo10(p1,p2){
 
 
 function checkHealth(){
-  console.log("Hello from checkHealth")
   //Health P1
   if ((player1DemonObj.health > (player1DemonObj.healthOrigin * 0.3)) && (player1DemonObj.health < (player1DemonObj.healthOrigin * 0.6))){
     imgDemonPlayer1.src = player1DemonObj.img60

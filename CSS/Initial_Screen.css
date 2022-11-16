@@ -1,60 +1,158 @@
-body {
-    background-image: url("../Images/DD_Initial_Screen.PNG");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    position: relative;
+/* SMALL SCREEN */
+@media screen and (max-width:480px){
+    body {
+        background-size: 100%;
+        background-color: #d93e3e;
+        max-width: 100%;
+        overflow-x: hidden;
+       }
+    /* GEN DIV */
+    .mainDistribution{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
     
-   }
-
-.anchorFlex {
-    display: flex;
-    justify-content: center;
+    /* A) IMG DIV */
+    .imgDiv{
+        margin-top: 120px;
+        width: 98%;
+        display: inline;
+        text-align: center;
+    }
+    .imgLogo {
+        width: 95vw;
+    }
+    
+    /* B) LINKS DIV */
+    .anchorFlex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .anchor {
+        background-color: #2d202f;
+        width: 30vw;
+        color: white;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 120%;
+        text-decoration: none;
+        text-align: center;
+        padding: 10px;
+        transition: all 0.2s ease-in-out;
+    }
+    
+    .anchor:hover {
+        transform: scale(1.1);
+    }
+    
+    .anchor:active {
+        transform: scale(0.9);
+    }
+    
+    .linkLogos{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        transition: all 0.2s ease-in-out;
+    }
+    .logo {
+        width: 8vw;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .logo:hover {
+        transform: scale(1.1);
+    }
+    
+    .logo:active {
+        transform: scale(0.9);
+    }
 }
 
-.anchor {
-    background-color: #3d2f40;
-    width: 35vw;
-    height: 7vh;
-    color: white;
-    margin-bottom: 200px;
-    margin-top: 60%;
-    border-radius: 10px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 180%;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-}
 
-.anchor:hover {
-    transform: scale(1.1);
-}
-
-.anchor:active {
-    transform: scale(0.9);
-}
-
-.logo {
-    width: 4vw;
-    margin-bottom: 200px;
-    padding-left: 3px;
-    padding-right: 3px;
-}
-
-.logos {
-    margin-top: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-}
-
-.logos:hover {
-    transform: scale(1.1);
-}
-
-.logos:active {
-    transform: scale(0.9);
+/* STANDARD SCREEN */
+@media screen and (min-width:481px){
+    body {
+        background-size: 100%;
+        background-color: #d93e3e;
+       }
+    /* GEN DIV */
+    .mainDistribution{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    
+    /* A) IMG DIV */
+    .imgDiv{
+        margin-top: 0px;
+        width: 100%;
+        display: inline;
+        text-align: center;
+    }
+    .imgLogo {
+        width: 65vw;
+    }
+    
+    /* B) LINKS DIV */
+    .anchorFlex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .anchor {
+        background-color: #2d202f;
+        width: 20vw;
+        color: white;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 120%;
+        text-decoration: none;
+        text-align: center;
+        padding: 10px;
+        transition: all 0.2s ease-in-out;
+    }
+    
+    .anchor:hover {
+        transform: scale(1.1);
+    }
+    
+    .anchor:active {
+        transform: scale(0.9);
+    }
+    
+    .linkLogos{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        transition: all 0.2s ease-in-out;
+    }
+    .logo {
+        width: 4vw;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .logo:hover {
+        transform: scale(1.1);
+    }
+    
+    .logo:active {
+        transform: scale(0.9);
+    }
 }
